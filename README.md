@@ -1,5 +1,7 @@
 # UnitTestPractice
 
+[![Test](https://github.com/ZachBoggs/UnitTestPractice/actions/workflows/ci.yml/badge.svg)](https://github.com/ZachBoggs/UnitTestPractice/actions/workflows/ci.yml)
+
 ## Getting Started
 
 Prerequisites:
