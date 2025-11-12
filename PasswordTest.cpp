@@ -78,3 +78,110 @@ TEST(PasswordTest, three_leading_space_password)
 	ASSERT_EQ(3, actual);
 }
 
+
+
+
+TEST(PasswordTest, mixed_case_empty)
+{
+	Password my_password;
+	bool result = my_password.has_mixed_case("");
+	ASSERT_FALSE(result);
+}
+
+TEST(PasswordTest, mixed_case_lower_then_upper)
+{
+	Password my_password;
+	bool result = my_password.has_mixed_case("aA");
+	ASSERT_TRUE(result);
+}
+
+TEST(PasswordTest, mixed_case_upper_then_lower)
+{
+	Password my_password;
+	bool result = my_password.has_mixed_case("Aa");
+	ASSERT_TRUE(result);
+}
+
+TEST(PasswordTest, mixed_case_long_lower_then_upper)
+{
+	Password my_password;
+	bool result = my_password.has_mixed_case("aaaaaA");
+	ASSERT_TRUE(result);
+}
+
+TEST(PasswordTest, mixed_case_long_upper_then_lower)
+{
+	Password my_password;
+	bool result = my_password.has_mixed_case("AAAAAa");
+	ASSERT_TRUE(result);
+}
+
+TEST(PasswordTest, mixed_case_mix_letters_lower_then_upper)
+{
+	Password my_password;
+	bool result = my_password.has_mixed_case("abcABC");
+	ASSERT_TRUE(result);
+}
+
+TEST(PasswordTest, mixed_case_short_all_lower)
+{
+	Password my_password;
+	bool result = my_password.has_mixed_case("aa");
+	ASSERT_FALSE(result);
+}
+
+TEST(PasswordTest, mixed_case_short_all_upper)
+{
+	Password my_password;
+	bool result = my_password.has_mixed_case("AA");
+	ASSERT_FALSE(result);
+}
+
+TEST(PasswordTest, mixed_case_mixed_all_lower)
+{
+	Password my_password;
+	bool result = my_password.has_mixed_case("abcabc");
+	ASSERT_FALSE(result);
+}
+
+TEST(PasswordTest, mixed_case_char_under_A_then_lower)
+{
+	Password my_password;
+	bool result = my_password.has_mixed_case("@a");
+	ASSERT_FALSE(result);
+}
+
+TEST(PasswordTest, mixed_case_char_above_Z_then_lower)
+{
+	Password my_password;
+	bool result = my_password.has_mixed_case("[a");
+	ASSERT_FALSE(result);
+}
+
+TEST(PasswordTest, mixed_case_upper_then_char_under_a)
+{
+	Password my_password;
+	bool result = my_password.has_mixed_case("A`");
+	ASSERT_FALSE(result);
+}
+
+TEST(PasswordTest, mixed_case_upper_then_char_above_z)
+{
+	Password my_password;
+	bool result = my_password.has_mixed_case("A{");
+	ASSERT_FALSE(result);
+}
+
+TEST(PasswordTest, mixed_case_lower_then_space)
+{
+	Password my_password;
+	bool result = my_password.has_mixed_case("a ");
+	ASSERT_FALSE(result);
+}
+
+TEST(PasswordTest, mixed_case_spaces)
+{
+	Password my_password;
+	bool result = my_password.has_mixed_case("a A");
+	ASSERT_TRUE(result);
+}
