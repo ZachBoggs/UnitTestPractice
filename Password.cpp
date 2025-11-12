@@ -21,6 +21,26 @@ int Password::count_leading_characters(string phrase)
   return repetition;
 }
 
+#include <map>
+unsigned int Password::unique_characters(string inputString)
+{
+	unsigned int totalUnique(0);
+	std::map<char,bool> characterMap;
+
+	for(const char& currentChar : inputString)
+	{
+		if(characterMap[currentChar] == false)
+		{
+			characterMap.insert({currentChar,true});
+			++totalUnique;
+		}
+	}
+
+	return totalUnique;
+}
+
+
+
 // Implementation A
 #include <cctype>
 bool Password::has_mixed_case(string str)

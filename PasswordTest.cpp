@@ -15,63 +15,66 @@ class PasswordTest : public ::testing::Test
 };
 
 
-TEST(PasswordTest, no_letter_password)
+//========================================
+//== test cases for count leading chars ==
+//========================================
+TEST(PasswordTest, count_leading_no_letter_password)
 {
 	Password my_password;
 	int actual = my_password.count_leading_characters("");
 	ASSERT_EQ(0, actual);
 }
 
-TEST(PasswordTest, single_letter_lower_password)
+TEST(PasswordTest, count_leading_single_letter_lower_password)
 {
 	Password my_password;
 	int actual = my_password.count_leading_characters("z");
 	ASSERT_EQ(1, actual);
 }
 
-TEST(PasswordTest, single_letter_upper_password)
+TEST(PasswordTest, count_leading_single_letter_upper_password)
 {
 	Password my_password;
 	int actual = my_password.count_leading_characters("Z");
 	ASSERT_EQ(1, actual);
 }
 
-TEST(PasswordTest, multi_letter_password)
+TEST(PasswordTest, count_leading_multi_letter_password)
 {
 	Password my_password;
 	int actual = my_password.count_leading_characters("ZZZZ");
 	ASSERT_EQ(4, actual);
 }
 
-TEST(PasswordTest, upper_and_lower_password)
+TEST(PasswordTest, count_leading_upper_and_lower_password)
 {
 	Password my_password;
 	int actual = my_password.count_leading_characters("aaaAAAaAA");
 	ASSERT_EQ(3, actual);
 }
 
-TEST(PasswordTest, number_test_password)
+TEST(PasswordTest, count_leading_number_test_password)
 {
 	Password my_password;
 	int actual = my_password.count_leading_characters("1234321");
 	ASSERT_EQ(1, actual);
 }
 
-TEST(PasswordTest, longer_password)
+TEST(PasswordTest, count_leading_longer_password)
 {
 	Password my_password;
 	int actual = my_password.count_leading_characters("7777777656777");
 	ASSERT_EQ(7, actual);
 }
 
-TEST(PasswordTest, multi_number_password)
+TEST(PasswordTest, count_leading_multi_number_password)
 {
 	Password my_password;
 	int actual = my_password.count_leading_characters("33322333");
 	ASSERT_EQ(3, actual);
 }
 
-TEST(PasswordTest, three_leading_space_password)
+TEST(PasswordTest, count_leading_three_leading_space_password)
 {
 	Password my_password;
 	int actual = my_password.count_leading_characters("   threespaces");
@@ -79,8 +82,90 @@ TEST(PasswordTest, three_leading_space_password)
 }
 
 
+//========================================
+//== test cases for unique characters   ==
+//========================================
+TEST(PasswordTest, unique_characters_empty)
+{
+	Password my_password;
+	unsigned int result = my_password.unique_characters("");
+	ASSERT_EQ(result,0);
+}
+
+TEST(PasswordTest, unique_characters_single_letter)
+{
+	Password my_password;
+	unsigned int result = my_password.unique_characters("a");
+	ASSERT_EQ(result,1);
+}
+
+TEST(PasswordTest, unique_characters_single_space)
+{
+	Password my_password;
+	unsigned int result = my_password.unique_characters(" ");
+	ASSERT_EQ(result,1);
+}
+
+TEST(PasswordTest, unique_characters_multi_single_character)
+{
+	Password my_password;
+	unsigned int result = my_password.unique_characters("aaaaa");
+	ASSERT_EQ(result,1);
+}
+
+TEST(PasswordTest, unique_characters_lower_upper_same_character_short)
+{
+	Password my_password;
+	unsigned int result = my_password.unique_characters("aA");
+	ASSERT_EQ(result,2);
+}
+
+TEST(PasswordTest, unique_characters_upper_lower_same_character_short)
+{
+	Password my_password;
+	unsigned int result = my_password.unique_characters("Aa");
+	ASSERT_EQ(result,2);
+}
+
+TEST(PasswordTest, unique_characters_lower_upper_same_character_longer)
+{
+	Password my_password;
+	unsigned int result = my_password.unique_characters("aaaaaAAAAA");
+	ASSERT_EQ(result,2);
+}
+
+TEST(PasswordTest, unique_characters_upper_lower_same_character_longer)
+{
+	Password my_password;
+	unsigned int result = my_password.unique_characters("AAAAAaaaaa");
+	ASSERT_EQ(result,2);
+}
+
+TEST(PasswordTest, unique_characters_mixed_lower)
+{
+	Password my_password;
+	unsigned int result = my_password.unique_characters("abcdabcd");
+	ASSERT_EQ(result,4);
+}
+
+TEST(PasswordTest, unique_characters_mixed_lower_then_upper)
+{
+	Password my_password;
+	unsigned int result = my_password.unique_characters("abcdABCD");
+	ASSERT_EQ(result,8);
+}
+
+TEST(PasswordTest, unique_characters_multi_space)
+{
+	Password my_password;
+	unsigned int result = my_password.unique_characters("     ");
+	ASSERT_EQ(result,1);
+}
 
 
+//========================================
+//== test cases for mixed case          ==
+//========================================
 TEST(PasswordTest, mixed_case_empty)
 {
 	Password my_password;
