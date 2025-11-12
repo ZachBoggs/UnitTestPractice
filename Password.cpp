@@ -31,7 +31,7 @@ unsigned int Password::unique_characters(string inputString)
 	{
 		if(characterMap[currentChar] == false)
 		{
-			characterMap.insert({currentChar,true});
+			characterMap[currentChar] = true;
 			++totalUnique;
 		}
 	}
